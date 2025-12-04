@@ -10,6 +10,7 @@ import { usePopUp } from "@/hooks/usePopUp";
 import { toast } from "react-toastify";
 import SuccessToast from "@/components/toasts/SucessToast";
 import { CardUpdateDoc } from "@/components/cardUpdateDoc";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
@@ -18,6 +19,7 @@ export default function Home() {
   const {popUpOpen, togglePopUp, setPopUpOpen} = usePopUp();
   const [popUpEdit, setPopUpEdit] = useState(false);
   const [selectedDocId, setSelectedDocId] = useState<string | null>(null);
+  const router = useRouter();
   
   const handleDelete = (id: string) => {
     deleteDoc(id)
@@ -27,6 +29,10 @@ export default function Home() {
   const handleUpdate = (id: string) => {
     setSelectedDocId(id)
     setPopUpEdit(!popUpEdit)
+  }
+
+  const handleOpenMarkDown = (id: string) => {
+    router.push(`/markdown/${id}`);
   }
 
 
@@ -40,7 +46,8 @@ export default function Home() {
            content={doc.content} 
            createdAt={new Date(doc.createdAt)}
            handleDelete={()=> {handleDelete(doc.id)}} 
-           handleUpdate={() => handleUpdate(doc.id)}  
+           handleUpdate={() => handleUpdate(doc.id)}
+           handleOpenMarkDown={() => handleOpenMarkDown(doc.id)}
            />
         ))}
 

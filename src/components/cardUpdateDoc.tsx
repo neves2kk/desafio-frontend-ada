@@ -52,8 +52,8 @@ export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpda
                 <div className="flex flex-col gap-3 py-5">
                     <FileText size={40} color="#3B82F6" />
                     <div>
-                        <h1 className="text-2xl font-semibold">Novo documento</h1>
-                        <p className="text-gray-500 text-lg">Dê o nome ao seu novo documento Markdown</p>
+                        <h1 className="text-2xl font-semibold">Atualizar documento</h1>
+                        <p className="text-gray-500 text-lg">Atualize os valores do seu documento!</p>
                     </div>
                 </div>
 

@@ -6,7 +6,8 @@ export const DocsContext = createContext({
     docs: [] as Docs[],
     addDoc: (doc: Docs) => {},
     deleteDoc: (id: string) => {},
-    updateDoc: (id: string, updatedContent: Partial<Docs>) => {}
+    updateDoc: (id: string, updatedContent: Partial<Docs>) => {},
+    findDocById: (id: string): Docs | undefined => undefined
 });
 
 interface DocsContextProvider{
@@ -65,8 +66,12 @@ export function DocsContextProvider({ children }: DocsContextProvider) {
         },);
     }
 
+    const findDocById = (id: string) => {
+        return docs.find((doc) => doc.id === id)
+    }
+
     return(
-        <DocsContext.Provider value={{addDoc, docs, deleteDoc, updateDoc}}>
+        <DocsContext.Provider value={{addDoc, docs, deleteDoc, updateDoc, findDocById}}>
             {children}
         </DocsContext.Provider>
     )
