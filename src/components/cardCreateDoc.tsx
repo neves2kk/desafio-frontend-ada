@@ -3,28 +3,34 @@
 import { FileText } from "@deemlol/next-icons";
 import { InputCreateMarkdown } from "./inputMarkdown";
 import { CustomButton } from "./customButton";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DocsContext } from "@/contexts/docsContext";
 import { useForm } from "react-hook-form";
+import { usePopUp } from "@/hooks/usePopUp";
+import { toast } from "react-toastify";
+import SuccessToast from "./toasts/SucessToast";
 
 
-interface CardCreateMarkdownProps {
+interface CardCreateDocProps {
     handleCancel?: () => void;
     handleCreate?: () => void;
 }
 
-interface inputs{
+interface inputsDocs{
     title: string;
     content: string;
 }
 
-export function CardCreateMarkdown({ handleCancel } : CardCreateMarkdownProps) {
+export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps) {
 
-    const {handleSubmit,register} = useForm<inputs>()
+    const {handleSubmit,register} = useForm<inputsDocs>()
 
     const {addDoc} = useContext(DocsContext);
+    const {popUpOpen,setPopUpOpen} = usePopUp();
+    
 
-    const onSubmit = (data: inputs) => {
+    const onSubmit = (data: inputsDocs) => {
+
         addDoc({
             id: crypto.randomUUID(),
             title: data.title,
@@ -32,7 +38,16 @@ export function CardCreateMarkdown({ handleCancel } : CardCreateMarkdownProps) {
             createdAt: new Date(),
             updatedAt: new Date()
         });
+        
+        if (handleCreate){
+            handleCreate();
+        }
+
+        toast(<SuccessToast title="Sucesso!" description="Mecânica cadastrada com sucesso." />)
     }
+
+    
+
     
     return (
             <form className="rounded-2xl bg-white shadow-md z-10 w-140 h-120 p-6 absolute" onSubmit={handleSubmit(onSubmit)}>

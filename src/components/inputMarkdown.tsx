@@ -1,7 +1,7 @@
 
 interface InputCreateMarkdownProps extends React.InputHTMLAttributes<HTMLInputElement> {
     titulo: string;
-    placeholder: string;
+    placeholder?: string;
 }
 
 export function InputCreateMarkdown({ titulo, placeholder, ...props }: InputCreateMarkdownProps) {
