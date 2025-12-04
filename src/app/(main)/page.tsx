@@ -59,7 +59,7 @@ export default function Home() {
         )}
       </main>
     ) : (
-      <main className="flex items-center justify-center h-280 flex-col gap-10 px-4">
+      <main className="flex items-center justify-center h-180  flex-col gap-10 px-4">
         <FileText size={100} color="#3B82F6" />
         <div className="flex items-center justify-center flex-col gap-2">
           <h1 className="text-4xl font-semibold">Nenhum documento ainda</h1>

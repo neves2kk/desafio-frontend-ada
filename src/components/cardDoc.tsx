@@ -21,8 +21,14 @@ export function CardDoc({title, content, createdAt,handleDelete, handleUpdate, h
                 <FileText size={40} color="#3B82F6" />
                 <h1 className="text-2xl font-semibold w-80">{title}</h1>
                 <div className="flex  gap-2 w-20  justify-center bg-gray-100 py-1 px-2 border border-gray-300 rounded-lg ml-auto">
-                    <Edit size={20} className=" text-black hover:text-blue-600" onClick={handleUpdate}/>
-                    <Trash2 size={20} cursor="red" className="text-black cursor-pointer hover:text-red-500" onClick={handleDelete}/>
+                    <Edit size={20} className=" text-black hover:text-blue-600" onClick={(e) => {
+                            e.stopPropagation(); 
+                            handleUpdate && handleUpdate();
+                        }}/>
+                    <Trash2 size={20} cursor="red" className="text-black cursor-pointer hover:text-red-500" onClick={(e) => {
+                            e.stopPropagation(); 
+                            handleDelete && handleDelete();
+                    }}/>
                 </div>
             </div>
             <p className="text-gray-500 text-lg">{content}</p>

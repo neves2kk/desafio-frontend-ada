@@ -12,7 +12,7 @@ const saira = Saira({
 });
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -22,7 +22,7 @@ export default function RootLayout({
         className={saira.className}
       >
         <DocsContextProvider>
-          <Header/>
+          
           {children}
           <ToastContainer
             theme="light"

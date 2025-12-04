@@ -26,7 +26,6 @@ export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps
     const {handleSubmit,register} = useForm<inputsDocs>()
 
     const {addDoc} = useContext(DocsContext);
-    const {popUpOpen,setPopUpOpen} = usePopUp();
     
 
     const onSubmit = (data: inputsDocs) => {
@@ -45,8 +44,6 @@ export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps
 
         toast(<SuccessToast title="Sucesso!" description="Mecânica cadastrada com sucesso." />)
     }
-
-    
 
     
     return (

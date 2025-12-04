@@ -6,7 +6,6 @@ import { CustomButton } from "./customButton";
 import { useContext, useEffect, useState } from "react";
 import { DocsContext } from "@/contexts/docsContext";
 import { useForm } from "react-hook-form";
-import { usePopUp } from "@/hooks/usePopUp";
 import { toast } from "react-toastify";
 import SuccessToast from "./toasts/SucessToast";
 
@@ -40,9 +39,12 @@ export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpda
             content: data.content,
             updatedAt: new Date()
         });
+        
         if (handleUpdate){
             handleUpdate();
         }
+        toast(<SuccessToast title="Atualizado!" description="Documento atualizado com sucesso." />)
+
     }
 
 
