@@ -1,5 +1,6 @@
 "use client"
 
+import { defaultMarkdownText } from "@/utils/markdownTextDefault";
 import { createContext, useEffect, useState } from "react";
 
 export const DocsContext = createContext({
@@ -7,7 +8,9 @@ export const DocsContext = createContext({
     addDoc: (doc: Docs) => {},
     deleteDoc: (id: string) => {},
     updateDoc: (id: string, updatedContent: Partial<Docs>) => {},
-    findDocById: (id: string): Docs | undefined => undefined
+    findDocById: (id: string): Docs | undefined => undefined,
+    findMarkDownById: (id: string): string | undefined => undefined,
+    updateMarkdownContent: (id: string, markdownContent: string) => {}
 });
 
 interface DocsContextProvider{
@@ -38,7 +41,8 @@ export function DocsContextProvider({ children }: DocsContextProvider) {
             title: doc.title,
             content: doc.content,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            markdownContent: defaultMarkdownText
         }
 
         setDocs((prevDocs) => {
@@ -70,8 +74,23 @@ export function DocsContextProvider({ children }: DocsContextProvider) {
         return docs.find((doc) => doc.id === id)
     }
 
+    const findMarkDownById = (id: string) => {
+        const doc = docs.find((doc) => doc.id === id);
+        return doc ? doc.markdownContent : undefined;
+    }
+
+    const updateMarkdownContent = (id: string, markdownContent: string) => {
+        setDocs((prevDocs) => {
+            const updatedDocs = prevDocs.map((doc) =>
+                doc.id === id ? { ...doc, markdownContent, updatedAt: new Date() } : doc
+            );
+            localStorage.setItem("docs", JSON.stringify(updatedDocs));
+            return updatedDocs;
+        });
+    }
+
     return(
-        <DocsContext.Provider value={{addDoc, docs, deleteDoc, updateDoc, findDocById}}>
+        <DocsContext.Provider value={{addDoc, docs, deleteDoc, updateDoc, findDocById, findMarkDownById, updateMarkdownContent}}>
             {children}
         </DocsContext.Provider>
     )

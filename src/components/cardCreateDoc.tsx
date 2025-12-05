@@ -6,9 +6,9 @@ import { CustomButton } from "./customButton";
 import { useContext, useEffect, useState } from "react";
 import { DocsContext } from "@/contexts/docsContext";
 import { useForm } from "react-hook-form";
-import { usePopUp } from "@/hooks/usePopUp";
 import { toast } from "react-toastify";
 import SuccessToast from "./toasts/SucessToast";
+import { defaultMarkdownText } from "@/utils/markdownTextDefault";
 
 
 interface CardCreateDocProps {
@@ -23,9 +23,10 @@ interface inputsDocs{
 
 export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps) {
 
-    const {handleSubmit,register} = useForm<inputsDocs>()
+    const {handleSubmit,register,setValue} = useForm<inputsDocs>()
 
     const {addDoc} = useContext(DocsContext);
+
     
 
     const onSubmit = (data: inputsDocs) => {
@@ -35,7 +36,8 @@ export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps
             title: data.title,
             content: data.content,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            markdownContent: defaultMarkdownText,
         });
         
         if (handleCreate){

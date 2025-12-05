@@ -14,6 +14,9 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-hook-form": "^7.67.0",
+    "react-markdown": "^10.1.0",
+    "react-split": "^2.0.14",
+    "react-split-pane": "^0.1.92",
     "react-toastify": "^11.0.5"
   },
   "devDependencies": {
