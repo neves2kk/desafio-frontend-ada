@@ -9,6 +9,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import SuccessToast from "../toasts/SucessToast";
 import { defaultMarkdownText } from "@/utils/markdownTextDefault";
+import {z} from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod";
+
 
 
 interface CardCreateDocProps {
@@ -16,20 +19,22 @@ interface CardCreateDocProps {
     handleCreate?: () => void;
 }
 
-interface inputsDocs{
-    title: string;
-    content: string;
-}
+const docSchema = z.object({
+    title: z.string().min(1, "O título é obrigatório"),
+    content: z.string(),
+});
+
+type DocSchema = z.infer<typeof docSchema>;
 
 export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps) {
 
-    const {handleSubmit,register} = useForm<inputsDocs>()
+    const {handleSubmit,register, formState: {errors}} = useForm<DocSchema>({
+        resolver: zodResolver(docSchema)
+    })
 
     const {addDoc} = useContext(DocsContext);
 
-    
-
-    const onSubmit = (data: inputsDocs) => {
+    const onSubmit = (data: DocSchema) => {
 
         addDoc({
             id: crypto.randomUUID(),
@@ -44,12 +49,12 @@ export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps
             handleCreate();
         }
 
-        toast(<SuccessToast title="Sucesso!" description="Mecânica cadastrada com sucesso." />)
+       
     }
 
     
     return (
-            <form className="rounded-2xl bg-white shadow-md z-10 w-140 h-120 p-6 absolute" onSubmit={handleSubmit(onSubmit)}>
+            <form className="rounded-2xl bg-white shadow-md z-10 w-140 h-135 p-6 absolute" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-3 py-5">
                     <FileText size={40} color="#3B82F6" />
                     <div>
@@ -58,8 +63,9 @@ export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                    <InputCreateMarkdown {...register("title")} titulo="Título" placeholder="Ex: Notas da reunião"/>
+                <div className="flex flex-col gap-4" >
+                    <InputCreateMarkdown {...register("title", { required: true }) }   titulo="Título" placeholder="Ex: Notas da reunião"/>
+                    {errors.title && <span className="text-red-500 text-sm">{errors.title.message}</span>}
                     <InputCreateMarkdown {...register("content")} titulo="Descrição" placeholder="Ex: Detalhes da reunião"/>
                 </div>
 

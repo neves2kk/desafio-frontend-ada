@@ -8,6 +8,9 @@ import { DocsContext } from "@/contexts/docsContext";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import SuccessToast from "../toasts/SucessToast";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 
 
 interface CardCreateUpdateProps {
@@ -16,14 +19,18 @@ interface CardCreateUpdateProps {
     id: string;
 }
 
-interface inputsDocs{
-    title: string;
-    content: string;
-}
+const docSchema = z.object({
+    title: z.string().min(1, "O título é obrigatório"),
+    content: z.string(),
+});
+
+type DocSchema = z.infer<typeof docSchema>;
 
 export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpdateProps) {
 
-    const {handleSubmit,register, setValue} = useForm<inputsDocs>()
+    const {handleSubmit,register, setValue, formState: {errors}} = useForm<DocSchema>({
+        resolver: zodResolver(docSchema)
+    })
     const {updateDoc,docs} = useContext(DocsContext);
     const [docToEdit, setDocToEdit] = useState<Docs | null>(null);
     
@@ -33,7 +40,7 @@ export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpda
          setValue("content", docToEdit?.content || "");
     },[docToEdit])
 
-    const onSubmit = (data: inputsDocs) => {
+    const onSubmit = (data: DocSchema) => {
         updateDoc(id, {
             title: data.title,
             content: data.content,
@@ -43,14 +50,12 @@ export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpda
         if (handleUpdate){
             handleUpdate();
         }
-        toast(<SuccessToast title="Atualizado!" description="Documento atualizado com sucesso." />)
-
     }
 
 
     
     return (
-            <form className="rounded-2xl bg-white shadow-md z-10 w-140 h-120 p-6 absolute" onSubmit={handleSubmit(onSubmit)}>
+            <form className="rounded-2xl bg-white shadow-md z-10 w-140 h-135 p-6 absolute" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-3 py-5">
                     <FileText size={40} color="#3B82F6" />
                     <div>
@@ -61,6 +66,7 @@ export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpda
 
                 <div className="flex flex-col gap-4">
                     <InputCreateMarkdown {...register("title")} titulo="Título" />
+                    {errors.title && <span className="text-red-500 text-sm">{errors.title.message}</span>}
                     <InputCreateMarkdown {...register("content")} titulo="Descrição"/>
                 </div>
 

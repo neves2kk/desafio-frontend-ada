@@ -1,7 +1,10 @@
 "use client"
 
+import ErrorToast from "@/components/toasts/ErrorToast.";
+import SuccessToast from "@/components/toasts/SucessToast";
 import { defaultMarkdownText } from "@/utils/markdownTextDefault";
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export const DocsContext = createContext({
     docs: [] as Docs[],
@@ -45,11 +48,22 @@ export function DocsContextProvider({ children }: DocsContextProvider) {
             markdownContent: defaultMarkdownText
         }
 
-        setDocs((prevDocs) => {
+        const existingDoc = docs.find((doc) => doc.title === newDoc.title);
+
+        if (existingDoc) {
+            toast(<ErrorToast title="Erro!" description="Já existe um documento com esse título." />);
+            return;
+        }else{
+            setDocs((prevDocs) => {
             const updatedDocs = [...prevDocs, newDoc];
             localStorage.setItem("docs", JSON.stringify(updatedDocs));
             return updatedDocs;
+            
         });
+
+        toast(<SuccessToast title="Sucesso!" description="Documento criado com sucesso." />);
+        }
+
     }
 
     const deleteDoc = (id: string) =>{
@@ -66,8 +80,10 @@ export function DocsContextProvider({ children }: DocsContextProvider) {
                 doc.id === id ? { ...doc, ...updatedContent, updatedAt: new Date() } : doc
             );
             localStorage.setItem("docs", JSON.stringify(updatedDocs));
+            
             return updatedDocs;
         },);
+        toast(<SuccessToast title="Atualizado!" description="Documento atualizado com sucesso." />);
     }
 
     const findDocById = (id: string) => {
