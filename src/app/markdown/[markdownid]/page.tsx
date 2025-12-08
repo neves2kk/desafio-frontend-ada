@@ -1,10 +1,10 @@
 "use client"
 
-import { MarkDownEditor } from "@/components/markdownEditor";
-import { MarkdownHeader } from "@/components/markdownHeader";
-import { MarkDownPreview } from "@/components/markdownPreview";
+import { MarkDownEditor } from "@/components/markdown/markdownEditor";
+import { MarkdownHeader } from "@/components/markdown/markdownHeader";
+import { MarkDownPreview } from "@/components/markdown/markdownPreview";
 import SuccessToast from "@/components/toasts/SucessToast";
-import { Toolbar } from "@/components/toolbar";
+import { Toolbar } from "@/components/ui/toolbar";
 import { DocsContext } from "@/contexts/docsContext";
 import { useMarkdownFunctions } from "@/hooks/useMarkdownFunctions";
 import { useRouter } from "next/navigation";
@@ -43,7 +43,7 @@ export default function MarkdownPage({params} : {params: Promise<{ markdownid: s
 
 
     return (
-        <div>
+        <div className="h-full">
             <MarkdownHeader 
              docTitle={doc?.title || ""}
              handleSave={() => {
@@ -51,8 +51,8 @@ export default function MarkdownPage({params} : {params: Promise<{ markdownid: s
              }}
              handleBack={()=>{router.push("/")}} 
              />
-             <div className="flex overflow-y-hidden">
-                <div className="w-1/2">
+             <div className="flex overflow-y-hidden h-[calc(100vh-94.67px)]"> 
+                <div className="w-1/2 flex flex-col border-r border-gray-300">
 
                 <Toolbar 
                 handleH1={handleTitleH1}

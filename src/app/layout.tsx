@@ -1,4 +1,4 @@
-import { Header } from "@/components/header";
+import { Header } from "@/components/ui/header";
 import "./globals.css";
 import {Saira} from "next/font/google"; 
 import { DocsContextProvider } from "@/contexts/docsContext";

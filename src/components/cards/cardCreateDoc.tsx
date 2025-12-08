@@ -1,13 +1,13 @@
 "use client"
 
 import { FileText } from "@deemlol/next-icons";
-import { InputCreateMarkdown } from "./inputMarkdown";
-import { CustomButton } from "./customButton";
+import { InputCreateMarkdown } from "../ui/inputMarkdown";
+import { CustomButton } from "../ui/customButton";
 import { useContext, useEffect, useState } from "react";
 import { DocsContext } from "@/contexts/docsContext";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import SuccessToast from "./toasts/SucessToast";
+import SuccessToast from "../toasts/SucessToast";
 import { defaultMarkdownText } from "@/utils/markdownTextDefault";
 
 
@@ -23,7 +23,7 @@ interface inputsDocs{
 
 export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps) {
 
-    const {handleSubmit,register,setValue} = useForm<inputsDocs>()
+    const {handleSubmit,register} = useForm<inputsDocs>()
 
     const {addDoc} = useContext(DocsContext);
 

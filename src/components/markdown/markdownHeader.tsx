@@ -1,6 +1,6 @@
 import { Save } from "@deemlol/next-icons";
-import { BackButton } from "./backButton";
-import { CustomButton } from "./customButton";
+import { BackButton } from "../ui/backButton";
+import { CustomButton } from "../ui/customButton";
 
 interface MarkdownHeaderProps {
     docTitle: string;

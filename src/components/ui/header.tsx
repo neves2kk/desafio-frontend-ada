@@ -5,7 +5,7 @@ import { FileText, Plus } from "@deemlol/next-icons";
 import { useContext } from "react";
 import { CustomButton } from "./customButton";
 import { usePopUp } from "@/hooks/usePopUp";
-import { CardCreateDoc } from "./cardCreateDoc";
+import { CardCreateDoc } from "../cards/cardCreateDoc";
 
 
 export function Header(){

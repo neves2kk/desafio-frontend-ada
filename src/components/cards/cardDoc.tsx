@@ -15,7 +15,7 @@ interface CardDocProps {
 export function CardDoc({title, content, createdAt,handleDelete, handleUpdate, handleOpenMarkDown}: CardDocProps){
 
     return(
-        <div className="border border-gray-300 rounded-2xl h-45 w-120 px-5 py-5 flex flex-col gap-4 shadow-lg transition duration-300 ease-in-out
+        <div className="border  border-gray-300 rounded-2xl h-45 w-110 px-5 py-5 flex flex-col gap-4 shadow-lg transition duration-300 ease-in-out
          hover:border-blue-200 cursor-pointer hover:text-blue-400 hover:shadow-xl hover:-translate-y-1" onClick={handleOpenMarkDown}>
             <div className="flex items-center gap-3">
                 <FileText size={40} color="#3B82F6" />

@@ -1,9 +1,9 @@
-import headingH1 from '../assets/heading-h1.svg'
-import headingH2 from '../assets/heading-h2.svg'
-import headingH3 from '../assets/heading-h3.svg'
-import headingH4 from '../assets/heading-h4.svg'
-import italic from '../assets/italic.svg'
-import bold from '../assets/bold.svg'
+import headingH1 from '../../assets/heading-h1.svg'
+import headingH2 from '../../assets/heading-h2.svg'
+import headingH3 from '../../assets/heading-h3.svg'
+import headingH4 from '../../assets/heading-h4.svg'
+import italic from '../../assets/italic.svg'
+import bold from '../../assets/bold.svg'
 import { Code, Italic, List } from '@deemlol/next-icons'
 
 interface ToolbarProps {
@@ -39,7 +39,7 @@ export function Toolbar({handleH1, handleH2, handleH3, handleH4, handleItalic, h
                     <img className='h-auto w-6' src={headingH4.src}/>
                 </button>
 
-                <div className='w-0.5 h-10  bg-gray-300'></div>
+                <div className='w-0.5 h-10 border  border-gray-300'/>
 
             </div>
 
@@ -57,7 +57,7 @@ export function Toolbar({handleH1, handleH2, handleH3, handleH4, handleItalic, h
                     <Code/>
                 </button>   
 
-                <div className='w-0.5 h-10  bg-gray-300'></div>
+                <div className='w-0.5 h-10 border  border-gray-300'/>
 
             </div>
 
