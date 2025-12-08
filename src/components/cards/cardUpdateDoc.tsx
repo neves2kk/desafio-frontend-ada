@@ -20,19 +20,25 @@ interface CardCreateUpdateProps {
 }
 
 const docSchema = z.object({
-    title: z.string().min(1, "O título é obrigatório"),
-    content: z.string(),
+    title: z.string().min(1, "O título é obrigatório").max(50, "O título deve ter no máximo 50 caracteres"),
+    content: z.string().max(200, "A descrição deve ter no máximo 200 caracteres"),
 });
 
 type DocSchema = z.infer<typeof docSchema>;
 
 export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpdateProps) {
 
-    const {handleSubmit,register, setValue, formState: {errors}} = useForm<DocSchema>({
-        resolver: zodResolver(docSchema)
+    const {handleSubmit,register, setValue, formState: {errors}, watch} = useForm<DocSchema>({
+        resolver: zodResolver(docSchema),
+        defaultValues: {
+            title: "",
+            content: "",
+        }
     })
     const {updateDoc,docs} = useContext(DocsContext);
     const [docToEdit, setDocToEdit] = useState<Docs | null>(null);
+    const watchedTitle = watch("title");
+    const watchedContent = watch("content");
     
     useEffect(()=>{
          setDocToEdit(docs.find((doc) => doc.id === id) || null);
@@ -50,6 +56,7 @@ export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpda
         if (handleUpdate){
             handleUpdate();
         }
+
     }
 
 
@@ -65,9 +72,20 @@ export function CardUpdateDoc({ handleCancel,handleUpdate, id } : CardCreateUpda
                 </div>
 
                 <div className="flex flex-col gap-4">
-                    <InputCreateMarkdown {...register("title")} titulo="Título" />
-                    {errors.title && <span className="text-red-500 text-sm">{errors.title.message}</span>}
-                    <InputCreateMarkdown {...register("content")} titulo="Descrição"/>
+                    <div>
+                        <InputCreateMarkdown {...register("title")} maxLength={50} titulo="Título" />
+                        <div className="flex w-full justify-between pt-2">
+                            {errors.title && <span className="text-red-500 text-sm">{errors.title.message}</span>}
+                            <span className="w-full text-right">{watchedTitle.length}/50</span>
+                        </div>
+                    </div>
+                    <div>
+                        <InputCreateMarkdown {...register("content")} maxLength={200} titulo="Descrição"/>
+                        <div className="flex w-full justify-between pt-2">
+                            {errors.content && <span className="text-red-500 text-sm">{errors.content.message}</span>}
+                            <span className="w-full text-right">{watchedContent.length}/200</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="pt-10 flex justify-end w-full gap-5">

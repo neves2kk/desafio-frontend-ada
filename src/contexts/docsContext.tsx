@@ -75,7 +75,14 @@ export function DocsContextProvider({ children }: DocsContextProvider) {
     }
 
     const updateDoc = (id: string, updatedContent: Partial<Docs>) => {
-        setDocs((prevDocs) => {
+
+        const verifyTitleConflict = docs.find((doc) => doc.title === updatedContent.title && doc.id !== id);
+
+        if (verifyTitleConflict) {
+            toast(<ErrorToast title="Erro!" description="Já existe um documento com esse título." />);
+            return;
+        }else{
+            setDocs((prevDocs) => {
             const updatedDocs = prevDocs.map((doc) =>
                 doc.id === id ? { ...doc, ...updatedContent, updatedAt: new Date() } : doc
             );
@@ -83,6 +90,7 @@ export function DocsContextProvider({ children }: DocsContextProvider) {
             
             return updatedDocs;
         },);
+        }        
         toast(<SuccessToast title="Atualizado!" description="Documento atualizado com sucesso." />);
     }
 
