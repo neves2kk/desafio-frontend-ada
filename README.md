@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto foi desenvolvido como parte do **Desafio Frontend**. O objetivo foi criar uma aplicação que permite criar, editar, visualizar e excluir documentos em **Markdown**, utilizando **Next.js** e **TypeScript**.
+Este projeto foi desenvolvido como parte do **Desafio Frontend** do projeto ADA. O objetivo foi criar uma aplicação que permite criar, editar, visualizar e excluir documentos em **Markdown**, utilizando **Next.js** e **TypeScript**.
 
 A aplicação armazena os documentos no **localStorage** do navegador e possui funcionalidades como a troca de tema (claro/escuro), validação de formulários e feedback visual para ações de sucesso ou erro. Além disso, a navegação entre as páginas é dinâmica, e a interface inclui uma toolbar para aplicar formatação Markdown aos textos.
 
