@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Desafio - Editor de Documentos Markdown com Next.js
 
-## Getting Started
+## Descrição
 
-First, run the development server:
+Este projeto foi desenvolvido como parte do **Desafio Frontend**. O objetivo foi criar uma aplicação que permite criar, editar, visualizar e excluir documentos em **Markdown**, utilizando **Next.js** e **TypeScript**.
+
+A aplicação armazena os documentos no **localStorage** do navegador e possui funcionalidades como a troca de tema (claro/escuro), validação de formulários e feedback visual para ações de sucesso ou erro. Além disso, a navegação entre as páginas é dinâmica, e a interface inclui uma toolbar para aplicar formatação Markdown aos textos.
+
+## Funcionalidades Implementadas
+
+- **CRUD de Documentos**: 
+  - Criar, renomear, editar e excluir documentos.
+  - Armazenamento de documentos no **localStorage**.
+
+- **Editor com Preview Markdown**: 
+  - Tela de edição com um **textarea** para escrita em Markdown e uma área de **preview** renderizada ao vivo utilizando a biblioteca **`react-markdown`**.
+
+- **Toolbar de Estilização**: 
+  - Adição de botões para formatação básica de Markdown:
+    - Negrito (**texto**)
+    - Itálico (*texto*)
+    - Título (# título)
+    - Lista simples (- item)
+    - Código inline (`code`)
+  - A toolbar manipula o texto no editor com base na seleção de texto e na posição do cursor.
+
+- **Context API**: 
+  - Uso de **Context API** para gerenciar a lista de documentos, o documento selecionado e as funções de criação, atualização e exclusão.
+
+- **Troca de Tema (Claro/Escuro)**: 
+  - Implementação da funcionalidade de troca de tema (claro/escuro) utilizando **`next-themes`**.
+
+- **Validação de Formulários**: 
+  - Validação de título e conteúdo com **`Zod`** e **`React Hook Form`** para gerenciamento de formulários.
+
+- **Feedback de Sucesso/Erro com Toasts**: 
+  - Exibição de feedback de sucesso ou erro utilizando a biblioteca **`react-toastify`**.
+
+
+## Como Rodar o Projeto
+
+Para rodar o projeto localmente, siga os passos abaixo:
+
+### 1. Clonar o Repositório
+
+Clone o repositório para sua máquina local:
+
+```bash
+git clone https://github.com/neves2kk/desafio-frontend-ada/edit/main/README.md
+cd <diretório_do_repositório>
+```
+
+### 2. Instalar as depêndencias
+
+```bash
+npm install
+# ou 
+yarn install
+```
+
+### 3. Rodar o projeto
 
 ```bash
 npm run dev
-# or
+ # ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
