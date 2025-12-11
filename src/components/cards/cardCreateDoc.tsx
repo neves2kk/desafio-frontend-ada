@@ -60,7 +60,7 @@ export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps
 
     
     return (
-            <form className="rounded-2xl bg-white shadow-md z-10 w-140 h-135 p-6 absolute" onSubmit={handleSubmit(onSubmit)}>
+            <form className="rounded-2xl bg-(--background) shadow-md z-10 w-140 h-135 p-6 absolute" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-3 py-5">
                     <FileText size={40} color="#3B82F6" />
                     <div>
@@ -74,14 +74,14 @@ export function CardCreateDoc({ handleCancel,handleCreate } : CardCreateDocProps
                         <InputCreateMarkdown {...register("title", { required: true }) } maxLength={50} titulo="Título" placeholder="Ex: Notas da reunião"/>
                         <div className="flex w-full justify-between pt-2">
                             {errors.title && <span className="text-red-500 text-sm">{errors.title.message}</span>}
-                            <span className="w-full text-right">{watchedTitle.length }/50</span>
+                            <span className="text-right">{watchedTitle.length }/50</span>
                         </div>
                     </div>
                     <div className="flex flex-col ">
                         <InputCreateMarkdown {...register("content")} titulo="Descrição" maxLength={200} placeholder="Ex: Detalhes da reunião"/>
                         <div className="flex w-full justify-between pt-2">
                             {errors.content && <span className="text-red-500 text-sm">{errors.content.message}</span>}
-                            <span className="w-full text-right">{watchedContent.length}/200</span>
+                            <span className="text-right">{watchedContent.length}/200</span>
                         </div>
                     </div>
                 </div>

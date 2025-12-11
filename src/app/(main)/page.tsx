@@ -12,21 +12,19 @@ import SuccessToast from "@/components/toasts/SucessToast";
 import { CardUpdateDoc } from "@/components/cards/cardUpdateDoc";
 import { useRouter } from "next/navigation";
 import { SearchBar } from "@/components/ui/searchBar";
+import { CardDelete } from "@/components/cards/cardDelete";
 
 export default function Home() {
 
 
-  const {docs,deleteDoc} = useContext(DocsContext);
+  const {docs} = useContext(DocsContext);
   const {popUpOpen, togglePopUp, setPopUpOpen} = usePopUp();
   const [popUpEdit, setPopUpEdit] = useState(false);
   const [selectedDocId, setSelectedDocId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
-  const router = useRouter();
-  
-  const handleDelete = (id: string) => {
-    deleteDoc(id)
-    toast(<SuccessToast title="Deletado!" description="Documento deletado com sucesso." />)
-  }
+  const [popUpDelete, setPopUpDelete] = useState(false);
+  const router = useRouter();  
+
 
   const handleUpdate = (id: string) => {
     setSelectedDocId(id)
@@ -37,12 +35,18 @@ export default function Home() {
     router.push(`/markdown/${id}`);
   }
 
+  const handleDelete = (id: string) => {
+    setSelectedDocId(id)
+    setPopUpDelete(true);
+  }
+
   const filteredDocs = docs.length > 0 ? docs.filter(doc => doc.title.includes(search)) : [];
 
+  console.log(popUpDelete)
 
   return (
     docs.length > 0 ? (
-      <main className="flex flex-col px-40 py-5 ">
+      <main className="flex flex-col px-30 py-5 ">
         <div className="flex flex-col py-10 gap-10">
           <SearchBar onChange={(e) => setSearch(e.target.value)} stateValue={search}/>
           <span className="text-lg text-gray-500">{filteredDocs.length} documentos</span>
@@ -54,11 +58,10 @@ export default function Home() {
               title={doc.title} 
               content={doc.content} 
               createdAt={new Date(doc.createdAt)}
-              handleDelete={()=> {handleDelete(doc.id)}} 
+              handleDelete={()=> handleDelete(doc.id)} 
               handleUpdate={() => handleUpdate(doc.id)}
               handleOpenMarkDown={() => handleOpenMarkDown(doc.id)}
               />
-
           ))}
 
           {popUpEdit && (
@@ -69,6 +72,15 @@ export default function Home() {
               </div>
             </>
           )}
+
+          {popUpDelete && (
+          <>
+            <div className="fixed inset-0 bg-black opacity-50 z-10" />
+            <div className="fixed inset-0 z-20 flex items-center justify-center">
+              <CardDelete id={selectedDocId || ""} handleCancel={() => setPopUpDelete(false)}  handlePopUp={() => setPopUpDelete(false)} />
+            </div>
+          </>
+        )}
           
         </div>
       </main>
@@ -89,6 +101,8 @@ export default function Home() {
             <CardCreateDoc handleCancel={togglePopUp} handleCreate={() => setPopUpOpen(false)}/>
           </>
         )}
+        
+
       </main>
     )
   );

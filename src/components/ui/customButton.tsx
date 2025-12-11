@@ -17,10 +17,10 @@ interface CreateMarkdownButtonProps extends ButtonHTMLAttributes<HTMLButtonEleme
 export function CustomButton({ text ,icon, role, ...props} : CreateMarkdownButtonProps) {
 
     const roleStyles: RoleButtonStyles = {
-        cancel: "border-2 border-gray-300 text-black rounded-2xl flex items-center px-5 py-3 cursor-pointer gap-3 ",
+        cancel: "border-2 border-gray-300 text-(--foreground) rounded-2xl flex items-center px-5 py-3 cursor-pointer gap-3 ",
         createDoc: " text-white bg-blue-500 rounded-2xl flex items-center px-5 py-3 cursor-pointer",
         create: "flex items-center gap-3 bg-blue-500 text-white px-6 py-4 rounded-2xl shadow-lg cursor-pointer",
-        save: "border-2 border-gray-300 text-black rounded-2xl flex items-center px-5 py-3 cursor-pointer gap-3 hover:text-blue-500 hover:border-blue-500 transition-colors duration-200"
+        save: "border-2 border-gray-300 text-(--foreground) rounded-2xl flex items-center px-5 py-3 cursor-pointer gap-3 hover:text-blue-500 hover:border-blue-500 transition-colors duration-200"
     }
 
     return (

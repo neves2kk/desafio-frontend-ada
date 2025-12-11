@@ -10,6 +10,8 @@ body,html {
   -webkit-font-smoothing: antialiased;
   overflow-x:hidden;
   height: 100%;
+  background-color: var(--background);
+  color: var(--foreground);
   width: 100%;
 }
 .Toastify__toast {
@@ -19,4 +21,10 @@ body,html {
 #root{
     height: 100%;
     width: 100%;
+}
+
+[data-theme="dark"] {
+  --background: #171717;
+  --foreground: #3B82F6;
+  --itemsToolbar: white;
 }

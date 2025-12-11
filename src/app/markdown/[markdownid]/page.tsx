@@ -45,6 +45,7 @@ export default function MarkdownPage({params} : {params: Promise<{ markdownid: s
     return (
         <div className="h-full">
             <MarkdownHeader 
+             textButton={markdownContent === (doc?.markdownContent || "") ? "Salvo" : "Salvar"}
              docTitle={doc?.title || ""}
              handleSave={() => {
                 handleSave(markdownid, markdownContent)

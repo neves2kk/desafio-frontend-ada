@@ -72,6 +72,7 @@ export function DocsContextProvider({ children }: DocsContextProvider) {
             localStorage.setItem("docs", JSON.stringify(updatedDocs));
             return updatedDocs;
         });
+        toast(<SuccessToast title="Deletado!" description="Documento deletado com sucesso." />);
     }
 
     const updateDoc = (id: string, updatedContent: Partial<Docs>) => {

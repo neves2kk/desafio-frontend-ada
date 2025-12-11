@@ -1,9 +1,4 @@
-import headingH1 from '../../assets/heading-h1.svg'
-import headingH2 from '../../assets/heading-h2.svg'
-import headingH3 from '../../assets/heading-h3.svg'
-import headingH4 from '../../assets/heading-h4.svg'
-import italic from '../../assets/italic.svg'
-import bold from '../../assets/bold.svg'
+import { LuHeading1, LuHeading2 , LuHeading3, LuHeading4, LuBold} from "react-icons/lu";
 import { Code, Italic, List } from '@deemlol/next-icons'
 
 interface ToolbarProps {
@@ -24,19 +19,19 @@ export function Toolbar({handleH1, handleH2, handleH3, handleH4, handleItalic, h
             <div className='flex gap-6'>
 
                 <button onClick={handleH1} className='cursor-pointer'>
-                    <img className='h-auto w-6' src={headingH1.src}/>
+                    <LuHeading1 size={24}/>
                 </button>
 
                 <button onClick={handleH2} className='cursor-pointer'>
-                    <img className='h-auto w-6' src={headingH2.src}/>
+                    <LuHeading2 size={24}/>
                 </button>
 
                 <button onClick={handleH3} className='cursor-pointer'>
-                    <img className='h-auto w-6'  src={headingH3.src}/>
+                    <LuHeading3 size={24}/>
                 </button>
 
                 <button onClick={handleH4} className='cursor-pointer'>
-                    <img className='h-auto w-6' src={headingH4.src}/>
+                    <LuHeading4 size={24}/>
                 </button>
 
                 <div className='w-0.5 h-10 border  border-gray-300'/>
@@ -50,7 +45,7 @@ export function Toolbar({handleH1, handleH2, handleH3, handleH4, handleItalic, h
                 </button>
 
                 <button onClick={handleBold} className='cursor-pointer'>
-                    <img className='h-auto w-6' src={bold.src}/>
+                    <LuBold size={24}/>
                 </button>   
 
                 <button onClick={handleCode} className='cursor-pointer'>
